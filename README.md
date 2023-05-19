@@ -1,8 +1,13 @@
 # D3: Physics
 
 Gameplay/Experience Requirements:
-- Continuous input of checking where the mouse is hovering to determine paddle color
-- Discrete inputs pressing the A/D keys to move left/right and clicking to continue
-- How the player's goal is achieved indirectly w/ physics engine
-- 3+ physics-based gameplay scenes
-- Other scenes
+- Continuous input of somewhat accelerating the paddle as the movement keys are held down for longer and the ball getting faster as the game goes on
+- Discrete inputs pressing the left and right keys to move, up to launch the ball, and space to change paddle color
+- The player bounces the ball against the paddle to destroy blocks
+- Level1, Level2, and Level3 are the physics-based gameplay scenes
+- Start1, Start2, and Start3 introduce the start of each level with brief instructions (ex. what colors are available). GameEnd gives the final game complete screen with the player's score.
+
+Assets:
+- All images were created in Aseprite
+
+Game link:

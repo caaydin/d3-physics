@@ -1,5 +1,7 @@
-// number of blocks destroyed to be used in the total at the end
-let score = 0;
+// global var
+let cursors, paddle, ball, blueBricks, redBricks, purpleBricks, greenBricks;
+let start = false;
+let score = 0; // number of blocks destroyed to be used in the total at the end
 
 let config = {
     type: Phaser.AUTO,

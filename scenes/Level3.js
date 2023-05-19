@@ -14,7 +14,7 @@ class Start3 extends Phaser.Scene {
             }
         ).setOrigin(0.5, 0.5);
         const text = this.add.text(480, 350,
-            `Left is blue, right is red, top is purple, and bottom is green`,
+            `Colors: Blue, red, purple, green`,
             {
             font: "24px",
         }
