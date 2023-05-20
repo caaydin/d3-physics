@@ -58,10 +58,10 @@ class Level1 extends Phaser.Scene {
 
         blueBricks = this.physics.add.group({
             key: 'blueBrick',
-            repeat: 9,
+            repeat: 8,
             immovable: true,
             setXY: {
-                x: 75,
+                x: 125,
                 y: 40,
                 stepX: 90
             }
@@ -69,10 +69,10 @@ class Level1 extends Phaser.Scene {
 
         redBricks = this.physics.add.group({
             key: 'redBrick',
-            repeat: 9,
+            repeat: 5,
             immovable: true,
             setXY: {
-                x: 75,
+                x: 300,
                 y: 80,
                 stepX: 90
             }
@@ -84,10 +84,17 @@ class Level1 extends Phaser.Scene {
                 case '1':
                     paddle.setTexture('bluePaddle');
                     paddleColor = "blue";
+                    if (!start)
+                    {
+                        ballColor = "blue";
+                    }
                     break;
                 case '2':
                     paddle.setTexture('redPaddle');
                     paddleColor = "red";
+                    if (!start) {
+                        ballColor = "red";
+                    }
                     break;
                 default:
                     break
@@ -111,6 +118,7 @@ class Level1 extends Phaser.Scene {
 
     update() {
         if (ball.body.y > this.physics.world.bounds.height) {
+            start = false;
             this.scene.start('start2Scene');
         } else {
             let isDown = this.input.activePointer;
@@ -137,52 +145,5 @@ class Level1 extends Phaser.Scene {
                 paddle.setVelocityX(350);
             }
         }
-        }
+    }
 }
-
-function hitBlueBrick(ball, brick) {
-    if (ballColor == "blue") {
-        brick.disableBody(true, true);
-        score++;
-    }
-  
-    if (ball.body.velocity.x == 0) {
-      randNum = Math.random();
-      if (randNum >= 0.5) {
-        ball.body.setVelocityX(200);
-      } else {
-        ball.body.setVelocityX(-200);
-      }
-    }
-  }
-
-  function hitRedBrick(ball, brick) {
-    if (ballColor == "red") {
-        brick.disableBody(true, true);
-        score++;
-    }
-  
-    if (ball.body.velocity.x == 0) {
-      randNum = Math.random();
-      if (randNum >= 0.5) {
-        ball.body.setVelocityX(200);
-      } else {
-        ball.body.setVelocityX(-200);
-      }
-    }
-  }
-
-  function hitPaddle(ball, paddle) {
-    ballColor = paddleColor;
-
-    // Increase the velocity of the ball after it bounces
-    ball.setVelocityY(ball.body.velocity.y - 5);
-  
-    let newXVelocity = Math.abs(ball.body.velocity.x) + 5;
-    // If the ball is to the left of the player, ensure the X Velocity is negative
-    if (ball.x < paddle.x) {
-        ball.setVelocityX(-newXVelocity);
-    } else {
-        ball.setVelocityX(newXVelocity);
-    }
-  }
