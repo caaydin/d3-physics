@@ -10,4 +10,4 @@ Gameplay/Experience Requirements:
 Assets:
 - All images were created in Aseprite
 
-Game link:
+Game link: https://caaydin.github.io/d3-physics/
