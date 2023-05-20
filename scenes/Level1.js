@@ -14,7 +14,7 @@ class Start1 extends Phaser.Scene {
             }
         ).setOrigin(0.5, 0.5);
         const text = this.add.text(480, 350,
-            `Press left and right arrow keys to move, up arrow key to launch the ball, and space to change paddle color\nColors: Blue, red\n\nClick to continue`,
+            `Press left and right arrow keys to move, up arrow key to launch the ball, and number keys to change paddle color\n1: Blue\n2: Red\n\nClick to continue`,
             {
             font: "24px",
         }
@@ -77,8 +77,26 @@ class Level1 extends Phaser.Scene {
                 stepX: 90
             }
         });
-        
+
+        // for changing paddle color
+        this.input.keyboard.on('keydown', (event) => {
+            switch(event.key) {
+                case '1':
+                    paddle.setTexture('bluePaddle');
+                    paddleColor = "blue";
+                    break;
+                case '2':
+                    paddle.setTexture('redPaddle');
+                    paddleColor = "red";
+                    break;
+                default:
+                    break
+            }
+        });
+
         cursors = this.input.keyboard.createCursorKeys();
+        paddleColor = "blue";
+        ballColor = "blue";
         paddle.setImmovable(true);
         paddle.setCollideWorldBounds(true);
         ball.setCollideWorldBounds(true);
@@ -86,8 +104,8 @@ class Level1 extends Phaser.Scene {
         this.physics.world.checkCollision.down = false;
 
         // colliders
-        this.physics.add.collider(ball, blueBricks, hitBrick, null, this);
-        this.physics.add.collider(ball, redBricks, hitBrick, null, this);
+        this.physics.add.collider(ball, blueBricks, hitBlueBrick, null, this);
+        this.physics.add.collider(ball, redBricks, hitRedBrick, null, this);
         this.physics.add.collider(ball, paddle, hitPaddle, null, this);
     }
 
@@ -104,6 +122,13 @@ class Level1 extends Phaser.Scene {
                     ball.setVelocityY(-300);
                 }
             }
+
+            // update ball color
+            if (ballColor == "blue") {
+                ball.setTexture('blueBall');
+            } else {
+                ball.setTexture('redBall');
+            }
     
             // moving paddle
             if (cursors.left.isDown) {
@@ -111,28 +136,43 @@ class Level1 extends Phaser.Scene {
             } else if (cursors.right.isDown) {
                 paddle.setVelocityX(350);
             }
-
-            // changing paddle color
-            // paddle.setTexture('bluePaddle');
-            // paddle.setTexture('redPaddle');
         }
         }
 }
 
-function hitBrick(ball, brick) {
-    brick.disableBody(true, true);
+function hitBlueBrick(ball, brick) {
+    if (ballColor == "blue") {
+        brick.disableBody(true, true);
+    }
   
     if (ball.body.velocity.x == 0) {
       randNum = Math.random();
       if (randNum >= 0.5) {
-        ball.body.setVelocityX(150);
+        ball.body.setVelocityX(200);
       } else {
-        ball.body.setVelocityX(-150);
+        ball.body.setVelocityX(-200);
+      }
+    }
+  }
+
+  function hitRedBrick(ball, brick) {
+    if (ballColor == "red") {
+        brick.disableBody(true, true);
+    }
+  
+    if (ball.body.velocity.x == 0) {
+      randNum = Math.random();
+      if (randNum >= 0.5) {
+        ball.body.setVelocityX(200);
+      } else {
+        ball.body.setVelocityX(-200);
       }
     }
   }
 
   function hitPaddle(ball, paddle) {
+    ballColor = paddleColor;
+
     // Increase the velocity of the ball after it bounces
     ball.setVelocityY(ball.body.velocity.y - 5);
   

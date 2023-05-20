@@ -1,5 +1,5 @@
 // global var
-let cursors, paddle, ball, blueBricks, redBricks, purpleBricks, greenBricks;
+let cursors, paddleColor, ballColor, paddle, ball, blueBricks, redBricks, purpleBricks, greenBricks;
 let start = false;
 let score = 0; // number of blocks destroyed to be used in the total at the end
 
