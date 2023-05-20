@@ -14,12 +14,16 @@ class Start2 extends Phaser.Scene {
             }
         ).setOrigin(0.5, 0.5);
         const text = this.add.text(480, 350,
-            `1: Blue\n2: Red\n3: Purple`,
+            score + `/20 blocks destroyed on Level 1\nCurrent score: ` + Math.round((score/20 * 100)) + `%\n1: Blue\n2: Red\n3: Purple\nClick to continue`,
             {
             font: "24px",
         }
         ).setOrigin(0.5, 0.5);
         text.setWordWrapWidth(600);
+
+        this.input.once('pointerdown', () => {
+            this.scene.start('level2Scene');
+        });
     }
 }
 

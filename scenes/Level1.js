@@ -143,6 +143,7 @@ class Level1 extends Phaser.Scene {
 function hitBlueBrick(ball, brick) {
     if (ballColor == "blue") {
         brick.disableBody(true, true);
+        score++;
     }
   
     if (ball.body.velocity.x == 0) {
@@ -158,6 +159,7 @@ function hitBlueBrick(ball, brick) {
   function hitRedBrick(ball, brick) {
     if (ballColor == "red") {
         brick.disableBody(true, true);
+        score++;
     }
   
     if (ball.body.velocity.x == 0) {
